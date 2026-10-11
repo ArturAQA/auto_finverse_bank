@@ -1,0 +1,11 @@
+class TransferLocators:
+    TAB_CARD = "transfer-tab-card"
+    TAB_EMAIL = "transfer-tab-email"
+    AMOUNT_INPUT = "transfer-amount-input"
+    CARD_NUMBER_INPUT = "transfer-card-number-input"
+    EXPIRY_MONTH_INPUT = "transfer-expiry-month-input"
+    EXPIRY_YEAR_INPUT = "transfer-expiry-year-input"
+    CVV_INPUT = "transfer-cvv-input"
+    RECIPIENT_EMAIL_INPUT = "transfer-recipient-email-input"
+    SUBMIT_BUTTON = "transfer-submit-button"
+    STATUS_MESSAGE = "transfer-status-message"
