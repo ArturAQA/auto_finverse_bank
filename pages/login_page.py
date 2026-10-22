@@ -9,7 +9,7 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 class LoginPage(BasePage):
-    URL = "https://dev.finverse-bank.ru"
+    URL = "https://finverse-bank.ru"
 
     def __init__(self, page: Page):
         super().__init__(page)
