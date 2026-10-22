@@ -9,27 +9,27 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
 class LoginPage(BasePage):
-    URL = "https://finverse-bank.ru"
-
+    
     def __init__(self, page: Page):
         super().__init__(page)
+        self.base_url = os.getenv("FINVERSE_BASE_URL", "https://finverse-bank.ru")
+        self.url = f"{self.base_url}/login"
 
     def open_login_page(self):
         """Открывает страницу авторизации банка"""
-        with allure.step(f"Открываем страницу логина: {self.URL}"):
-            self.open(self.URL)
+        with allure.step(f"Открываем страницу логина: {self.url}"):
+            self.open(self.url)
         return self
 
-    def login_with_env_credentials(self):
+    def login_with_env_credentials(self, email: str = None, password: str = None):
         """Выполняет авторизацию, используя безопасные переменные окружения"""
-        # Вытаскиваем секреты из системы
-        email = os.getenv("FINVERSE_USER")
-        password = os.getenv("FINVERSE_PASSWORD")
+        user_email = email or os.getenv("FINVERSE_USER")
+        user_password = password or os.getenv("FINVERSE_PASSWORD")
         
-        if not email or not password:
-            raise ValueError("Ошибка: Переменные окружения FINVERSE_USER или FINVERSE_PASSWORD не настроены!")
+        if not user_email or not user_password:
+            raise ValueError("Ошибка: Учетные данные не предоставлены и не найдены в env!")
 
         with allure.step("Вводим безопасные учетные данные из env-переменных"):
-            self.page.get_by_test_id(LoginLocators.EMAIL_INPUT).fill(email)
-            self.page.get_by_test_id(LoginLocators.PASSWORD_INPUT).fill(password)
+            self.page.get_by_test_id(LoginLocators.EMAIL_INPUT).fill(user_email)
+            self.page.get_by_test_id(LoginLocators.PASSWORD_INPUT).fill(user_password)
             self.page.get_by_test_id(LoginLocators.SUBMIT_BUTTON).click()
