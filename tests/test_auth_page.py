@@ -34,7 +34,7 @@ def test_invalid_login(page: Page):
     invalid_email = fake.email()
     invalid_password = fake.password(10)
     
-    login_page.login_with_env_credentials(email = invalid_email, password = invalid_password)
+    login_page.login_with_custom_credentials(email = invalid_email, password = invalid_password)
     
     with allure.step("Проверяем появление ошибки входа"):
         expect(page.get_by_test_id(LoginLocators.ERROR_MESSAGE)).to_be_visible()

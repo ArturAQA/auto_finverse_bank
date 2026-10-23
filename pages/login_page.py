@@ -21,10 +21,10 @@ class LoginPage(BasePage):
             self.open(self.url)
         return self
 
-    def login_with_env_credentials(self, email: str = None, password: str = None):
+    def login_with_env_credentials(self):
         """Выполняет авторизацию, используя безопасные переменные окружения"""
-        user_email = email or os.getenv("FINVERSE_USER")
-        user_password = password or os.getenv("FINVERSE_PASSWORD")
+        user_email = os.getenv("FINVERSE_USER")
+        user_password = os.getenv("FINVERSE_PASSWORD")
         
         if not user_email or not user_password:
             raise ValueError("Ошибка: Учетные данные не предоставлены и не найдены в env!")
@@ -33,3 +33,14 @@ class LoginPage(BasePage):
             self.page.get_by_test_id(LoginLocators.EMAIL_INPUT).fill(user_email)
             self.page.get_by_test_id(LoginLocators.PASSWORD_INPUT).fill(user_password)
             self.page.get_by_test_id(LoginLocators.SUBMIT_BUTTON).click()
+            
+    def login_with_custom_credentials(self, email: str, password: str):
+        """Выполняет авторизацию, используя введенные данные"""
+        if not email or not password:
+                    raise ValueError("Ошибка: Учетные данные не введены")
+                
+        with allure.step("Вводим учетные данные"):
+                    self.page.get_by_test_id(LoginLocators.EMAIL_INPUT).fill(email)
+                    self.page.get_by_test_id(LoginLocators.PASSWORD_INPUT).fill(password)
+                    self.page.get_by_test_id(LoginLocators.SUBMIT_BUTTON).click()
+        return self            
