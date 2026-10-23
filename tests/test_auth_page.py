@@ -1,3 +1,4 @@
+import pytest
 import allure
 from playwright.sync_api import Page, expect
 from pages.login_page import LoginPage
@@ -24,19 +25,20 @@ def test_successful_login(page: Page):
         expect(page.get_by_test_id(HeaderLocators.LOGOUT_BUTTON)).to_be_visible()
         
         
-@allure.title("Ошибка при авторизации с невалидными данными")
+@pytest.mark.parametrize("attempt", range(3),
+                         ids=["попытка_1", "попытка_2", "попытка_3"])
+@allure.title("Логин с рандомными данными Faker: {attempt}")
 @allure.feature("Авторизация")
-@allure.story("Попытка входа по случайным невалидным данным")
-def test_invalid_login(page: Page):
+def test_login_with_faker(page: Page, attempt):
     login_page = LoginPage(page)
     login_page.open_login_page()
     
     invalid_email = fake.email()
     invalid_password = fake.password(10)
-    
-    login_page.login_with_custom_credentials(email = invalid_email, password = invalid_password)
-    
+        
+    with allure.step(f"Вводим сгенерированные данные для попытки №{attempt + 1}"):
+        login_page.login_with_custom_credentials(email=invalid_email, password=invalid_password)
+        allure.attach(invalid_email, name="Email", attachment_type=allure.attachment_type.TEXT)
+        
     with allure.step("Проверяем появление ошибки входа"):
-        expect(page.get_by_test_id(LoginLocators.ERROR_MESSAGE)).to_be_visible()
-            
-            
+            expect(page.get_by_test_id(LoginLocators.ERROR_MESSAGE)).to_be_visible()
