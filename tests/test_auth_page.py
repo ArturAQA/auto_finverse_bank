@@ -21,7 +21,7 @@ def test_successful_login(page: Page):
         expected_dashboard_url = f"{login_page.base_url}/dashboard"
         expect(page).to_have_url(expected_dashboard_url)
         
-    with allure.step("Проверяем отображение интерфейса Дашборда"):
+    with allure.step("Проверяем отображение кнопки Выйти"):
         expect(page.get_by_test_id(HeaderLocators.LOGOUT_BUTTON)).to_be_visible()
         
         

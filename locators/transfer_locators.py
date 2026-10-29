@@ -9,3 +9,4 @@ class TransferLocators:
     RECIPIENT_EMAIL_INPUT = "transfer-recipient-email-input"
     SUBMIT_BUTTON = "transfer-submit-button"
     STATUS_MESSAGE = "transfer-status-message"
+    TRANSFER_FORM = "form"
