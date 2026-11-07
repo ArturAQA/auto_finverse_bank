@@ -11,75 +11,54 @@ from locators.transfer_locators import TransferLocators
 
 @allure.title("Личный кабинет открывается и содержит плашку с личным счётом")
 @allure.feature("Навигация по разделам Finverse Bank")
-def test_go_to_dashboard_page(page: Page):
-    login_page = LoginPage(page)
-        
-    login_page.open_login_page()
-    login_page.login_with_env_credentials()
+def test_go_to_dashboard_page(logged_in_page: Page):
+    dashboard_page = DashboardPage(logged_in_page)
     
     with allure.step("Проверяем успешный переход в раздел Кабинет"):
-        expected_dashboard_url = f"{login_page.base_url}/dashboard"
-        expect(page).to_have_url(expected_dashboard_url)
+        expected_dashboard_url = f"{dashboard_page.base_url}/dashboard"
+        expect(logged_in_page).to_have_url(expected_dashboard_url)
         
     with allure.step("Проверяем наличие плашки с личным Счётом"):
-        expect(page.get_by_test_id(DashboardLocators.ACCOUNT_CARD)).to_be_visible()
-        
+        expect(logged_in_page.get_by_test_id(DashboardLocators.ACCOUNT_CARD)).to_be_visible()
 
 @allure.title("Успешный переход из личного кабинета в раздел Перевод")
-@allure.feature("Навигация по разделам Finverse Bank")        
-def test_go_to_transfer_page(page: Page):
-    login_page = LoginPage(page)
-    dashboard_page = DashboardPage(page)
-    
-    login_page.open_login_page()
-    login_page.login_with_env_credentials()
+@allure.feature("Навигация по разделам Finverse Bank")
+def test_go_to_transfer_page(logged_in_page: Page):
+    dashboard_page = DashboardPage(logged_in_page)
     
     with allure.step("Нажимаем на кнопку Перевод в хедере приложения"):
         dashboard_page.click_nav_transfer()
         
     with allure.step("Проверяем успешный переход в раздел Перевод"):
-        expected_transfer_url = f"{login_page.base_url}/transfer"
-        expect(page).to_have_url(expected_transfer_url)
+        expect(logged_in_page).to_have_url(f"{dashboard_page.base_url}/transfer")
         
     with allure.step("Проверяем наличие формы для перевода"):
-        expect(page.locator(TransferLocators.TRANSFER_FORM)).to_be_visible()
-        
-        
+        expect(logged_in_page.locator(TransferLocators.TRANSFER_FORM)).to_be_visible()
+
 @allure.title("Успешный переход из личного кабинета в раздел История")
-@allure.feature("Навигация по разделам Finverse Bank")        
-def test_go_to_history_page(page: Page):
-    login_page = LoginPage(page)
-    dashboard_page = DashboardPage(page)
-    
-    login_page.open_login_page()
-    login_page.login_with_env_credentials()
+@allure.feature("Навигация по разделам Finverse Bank")
+def test_go_to_history_page(logged_in_page: Page):
+    dashboard_page = DashboardPage(logged_in_page)
     
     with allure.step("Нажимаем на кнопку История в хедере приложения"):
         dashboard_page.click_nav_history()
         
     with allure.step("Проверяем успешный переход в раздел История"):
-        expected_history_url = f"{login_page.base_url}/history"
-        expect(page).to_have_url(expected_history_url)
+        expect(logged_in_page).to_have_url(f"{dashboard_page.base_url}/history")
         
     with allure.step("Проверяем наличие заголовка раздела История"):
-        expect(page.locator(HistoryLocators.HISTORY_HEADING)).to_be_visible()
-        
-        
+        expect(logged_in_page.get_by_role("heading", name="История")).to_be_visible()
+
 @allure.title("Успешный переход из личного кабинета в раздел Безопасность")
-@allure.feature("Навигация по разделам Finverse Bank")        
-def test_go_to_security_page(page: Page):
-    login_page = LoginPage(page)
-    dashboard_page = DashboardPage(page)
-    
-    login_page.open_login_page()
-    login_page.login_with_env_credentials()
+@allure.feature("Навигация по разделам Finverse Bank")
+def test_go_to_security_page(logged_in_page: Page):
+    dashboard_page = DashboardPage(logged_in_page)
     
     with allure.step("Нажимаем на кнопку Безопасность в хедере приложения"):
         dashboard_page.click_nav_security()
         
     with allure.step("Проверяем успешный переход в раздел Безопасность"):
-        expected_secur_url = f"{login_page.base_url}/security"
-        expect(page).to_have_url(expected_secur_url)
+        expect(logged_in_page).to_have_url(f"{dashboard_page.base_url}/security")
         
     with allure.step("Проверяем наличие списка активных сессий"):
-        expect(page.get_by_test_id(SecurityLocators.SESSIONS_LIST)).to_be_visible()            
+        expect(logged_in_page.get_by_test_id(SecurityLocators.SESSIONS_LIST)).to_be_visible()

@@ -3,6 +3,7 @@ import allure
 import pytest
 from dotenv import load_dotenv
 from playwright.sync_api import sync_playwright
+from pages.login_page import LoginPage
 
 # Импортируем твой кастомный модуль (теперь с маленькой буквы!)
 from utils.video_recording import attach_video
@@ -58,4 +59,12 @@ def pytest_runtest_makereport(item, call):
                 name="screenshot",
                 attachment_type=allure.attachment_type.PNG
             )
-            attach_video(page)    
+            attach_video(page)
+            
+@pytest.fixture()
+def logged_in_page(page):
+    """Фикстура для автоматической авторизации перед тестом"""
+    login_page = LoginPage(page)
+    login_page.open_login_page()
+    login_page.login_with_env_credentials()
+    return page                
