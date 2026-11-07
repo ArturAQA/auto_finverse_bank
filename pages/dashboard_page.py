@@ -17,11 +17,16 @@ class DashboardPage(BasePage):
         return self
     
     def click_nav_history(self):
-            """Кликнуть по кнопке перехода в раздел История"""
-            self.page.get_by_test_id(HeaderLocators.NAV_HISTORY).click()
-            return self
+        """Кликнуть по кнопке перехода в раздел История"""
+        self.page.get_by_test_id(HeaderLocators.NAV_HISTORY).click()
+        return self
         
     def click_nav_security(self):
-                """Кликнуть по кнопке перехода в раздел Безопасность"""
-                self.page.get_by_test_id(HeaderLocators.NAV_SECURITY).click()
-                return self    
+        """Кликнуть по кнопке перехода в раздел Безопасность"""
+        self.page.get_by_test_id(HeaderLocators.NAV_SECURITY).click()
+        return self
+            
+    def click_logout_button(self):
+        """Кликнуть по кнопке выхода из аккаунта"""
+        self.page.get_by_test_id(HeaderLocators.LOGOUT_BUTTON).click()
+        return self
