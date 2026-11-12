@@ -2,6 +2,8 @@ import os
 import allure
 import pytest
 from dotenv import load_dotenv
+from playwright.sync_api import expect
+from locators.header_locators import HeaderLocators
 from playwright.sync_api import sync_playwright
 from pages.login_page import LoginPage
 
@@ -67,4 +69,5 @@ def logged_in_page(page):
     login_page = LoginPage(page)
     login_page.open_login_page()
     login_page.login_with_env_credentials()
+    expect(page.get_by_test_id(HeaderLocators.LOGOUT_BUTTON)).to_be_visible()
     return page                
