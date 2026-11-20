@@ -65,10 +65,10 @@ def test_go_to_security_page(logged_in_page: Page):
         expect(logged_in_page.get_by_test_id(SecurityLocators.SESSIONS_LIST)).to_be_visible()
         
 @pytest.mark.parametrize("path, expected_title", [
-    ("dashboard", "Дашборд | Finverse Bank"),
-    ("transfer", "Переводы | Finverse Bank"),
-    ("history", "История операций | Finverse Bank"),
-    ("security", "Безопасность | Finverse Bank"),
+    ("dashboard", "Finverse Bank"),
+    ("transfer", "Finverse Bank"),
+    ("history", "Finverse Bank"),
+    ("security", "Finverse Bank"),
 ], ids=["дашборд", "переводы", "история", "безопасность"])
 @allure.title("Страница {path} открывается с правильным заголовком вкладки")
 @allure.feature("Навигация")

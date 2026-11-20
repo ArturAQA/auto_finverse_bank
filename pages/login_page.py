@@ -43,4 +43,8 @@ class LoginPage(BasePage):
                     self.page.get_by_test_id(LoginLocators.EMAIL_INPUT).fill(email)
                     self.page.get_by_test_id(LoginLocators.PASSWORD_INPUT).fill(password)
                     self.page.get_by_test_id(LoginLocators.SUBMIT_BUTTON).click()
-        return self            
+        return self
+    
+    def go_to_register_page(self):
+        self.page.get_by_role("link", name="Зарегистрироваться").click()
+        return self

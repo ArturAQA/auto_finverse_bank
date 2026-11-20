@@ -5,6 +5,7 @@ class DashboardLocators:
     STATEMENT_DOWNLOAD = "dashboard-statement-download"
     RATES_WIDGET = "dashboard-rates-widget"
     BANK_CARD = "bank-card"
+    OPEN_ACCOUNT = ("button", "Открыть счёт")
 
 class CardRevealLocators:
     MODAL = "card-modal"
