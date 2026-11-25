@@ -34,7 +34,7 @@ class DashboardPage(BasePage):
     
     def open_account(self):
         """Кликнуть по кнопке открытия нового счета"""
-        self.page.get_by_role("button", name="Открыть счёт").click()
+        self.page.locator(DashboardLocators.OPEN_ACCOUNT_BUTTON).click()
         return self
     
     def click_issue_card_button(self):
@@ -44,10 +44,20 @@ class DashboardPage(BasePage):
     
     def confirm_issue_card(self):
         """Кликнуть на вторую кнопку 'Выпустить карту' для подтверждения"""
-        self.page.get_by_role("button", name="Выпустить карту").last.click()
+        self.page.locator(DashboardLocators.CONFIRM_ISSUE_CARD_BUTTON).click()
         return self
     
     def save_card(self):
         """Сохранить выпущенную карту"""
-        self.page.get_by_role("button", name="Сохранено").click()
+        self.page.locator(DashboardLocators.SAVE_CARD_BUTTON).click()
+        return self
+    
+    def block_card(self):
+        """Заблокировать карту"""
+        self.page.locator(DashboardLocators.CARD_BLOCK_BUTTON).first.click()
+        return self
+    
+    def unblock_card(self):
+        """Разблокировать карту"""
+        self.page.locator(DashboardLocators.CARD_UNBLOCK_BUTTON).first.click()
         return self

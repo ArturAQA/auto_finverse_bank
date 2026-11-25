@@ -5,7 +5,13 @@ class DashboardLocators:
     STATEMENT_DOWNLOAD = "dashboard-statement-download"
     RATES_WIDGET = "dashboard-rates-widget"
     BANK_CARD = "bank-card"
-    OPEN_ACCOUNT = ("button", "Открыть счёт")
+    OPEN_ACCOUNT_BUTTON = "div.card > button.btn-primary"
+    CONFIRM_ISSUE_CARD_BUTTON = "form.inline-form button.btn-primary"
+    SAVE_CARD_BUTTON = "div.modal-body button.btn.btn-primary"
+    CARD_BLOCK_BUTTON = "div.card-tile-actions button.btn.btn-small"
+    CARD_UNBLOCK_BUTTON = "div.card-tile-actions button.btn.btn-small"
+    BLOCKED_CARD_BADGE = "div.card-tile-actions span.badge.badge-warn"
+    ACTIVE_CARD_BADGE = "div.card-tile-actions span.badge.badge-success"
 
 class CardRevealLocators:
     MODAL = "card-modal"
