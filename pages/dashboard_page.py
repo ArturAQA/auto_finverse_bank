@@ -5,6 +5,7 @@ from pages.base_page import BasePage
 from locators.login_locators import LoginLocators
 from locators.header_locators import HeaderLocators
 from locators.dashboard_locators import DashboardLocators
+from locators.dashboard_locators import CardRevealLocators
 
 class DashboardPage(BasePage):
     def __init__(self, page):
@@ -60,4 +61,34 @@ class DashboardPage(BasePage):
     def unblock_card(self):
         """Разблокировать карту"""
         self.page.locator(DashboardLocators.CARD_UNBLOCK_BUTTON).first.click()
+        return self
+    
+    def click_card(self):
+        """Кликнуть по карте"""
+        self.page.get_by_test_id(DashboardLocators.BANK_CARD).first.click()
+        return self
+    
+    def click_modal_close_button(self):
+        """Кликнуть на крестик в модальном окне карты"""
+        self.page.get_by_test_id(CardRevealLocators.MODAL_CLOSE).click()
+        return self
+    
+    def click_outside_modal(self):
+        """Кликнуть мимо модального окна"""
+        self.page.mouse.click(10, 10)
+        return self
+    
+    def click_card_reveal_button(self):
+        """Кликнуть на кнопку Показать данные"""
+        self.page.get_by_test_id(CardRevealLocators.REVEAL_BUTTON).click()
+        return self
+    
+    def click_card_hide_button(self):
+        """Кликнуть на кнопку Скрыть номер"""
+        self.page.get_by_test_id(CardRevealLocators.HIDE_BUTTON).click()
+        return self
+    
+    def click_copy_number_button(self):
+        """Кликнуть на кнопку Копировать номер"""
+        self.page.get_by_test_id(CardRevealLocators.COPY_NUMBER_BUTTON).click()
         return self
